@@ -3,9 +3,9 @@
             [karmag.graph.core :refer :all])
   (:import java.util.UUID))
 
-(let [node-1 (create-node)
-      node-2 (create-node)
-      link-1 (create-link)]
+(let [node-1 (create-node :key 1)
+      node-2 (create-node :key 2)
+      link-1 (create-link :key 3)]
   (def _graph (-> (create-graph)
                   (add-node node-1)
                   (add-node node-2)
@@ -72,3 +72,11 @@
        _n1    true  false
        _n2    true  false
        _l1    false true))
+
+(deftest strip-test
+  (let [items [_n1 _n2 _l1]]
+    (doseq [item items]
+      (is (not= item (strip item)))
+      (is (not (nil? (strip item)))))
+    (is (= {:key 1} (strip _n1)))
+    (is (= {:key 3} (strip _l1)))))

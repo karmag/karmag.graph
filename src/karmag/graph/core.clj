@@ -23,6 +23,7 @@
 ;; extended protocols
 (def node? prot/node?)
 (def link? prot/link?)
+(def strip prot/strip)
 (def other-end prot/other-end)
 (def all-nodes prot/all-nodes)
 (def all-links prot/all-links)

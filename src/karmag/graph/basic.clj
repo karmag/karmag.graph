@@ -84,6 +84,7 @@
   ItemExt
   (node? [this] (get-in this [::meta :links]))
   (link? [this] (find (::meta this) :origin))
+  (strip [this] (dissoc this ::meta))
   LinkExt
   (other-end [this ident]
     (if (= (get-id ident) (get-origin this))

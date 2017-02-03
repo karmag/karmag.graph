@@ -41,7 +41,9 @@
   (node? [this]
     "Returns truthy value if item is a node.")
   (link? [this]
-    "Returns truthy value if item is a link."))
+    "Returns truthy value if item is a link.")
+  (strip [this]
+    "Removes non-user information from the item."))
 
 (defprotocol LinkExt
   (other-end [this node-ident]
