@@ -8,7 +8,8 @@
       node-3 (create-node :type :omega, :num 101)
       link-1 (create-link :context :hi, :id 10)
       link-2 (create-link :context :lo, :id 11)
-      link-3 (create-link :context :lo, :id 12)]
+      link-3 (-> (create-link :context :lo, :id 12, :viewer :default)
+                 (update-view :origin assoc :viewer :origin-specific))]
   (def _graph (-> (create-graph)
                   (add-node node-1)
                   (add-node node-2)
@@ -27,10 +28,15 @@
 
 (deftest prop-test
   (is (= #{_n1 _n2} (set (query _graph [(prop :type :alpha)]))))
-  (is (= #{_n1} (set (query _graph [(prop :type :alpha :num 101)]))))
+  (is (= #{_n1}     (set (query _graph [(prop :type :alpha :num 101)]))))
   (is (= #{_n1 _n3} (set (query _graph [(prop :num #(= 101 %))])))))
 
 (deftest link-test
   (is (= #{_n1 _n2} (set (query _graph _n3 [(link)]))))
-  (is (= #{_n2} (set (query _graph _n3 [(link :id 12)]))))
+  (is (= #{_n2}     (set (query _graph _n3 [(link :id 12)]))))
   (is (= #{_n1 _n2} (set (query _graph _n3 [(link :context #(#{:lo} %))])))))
+
+(deftest view-test
+  (is (= [_n3] (query _graph _n2 [(link :viewer :origin-specific)])))
+  (is (= []    (query _graph _n3 [(link :viewer :origin-specific)])))
+  (is (= [_n2] (query _graph _n3 [(link :viewer :default)]))))

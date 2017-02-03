@@ -47,7 +47,13 @@
 
 (defprotocol LinkExt
   (other-end [this node-ident]
-    "Returns the ident of the node that is not the given ident."))
+    "Returns the ident of the node that is not the given ident.")
+  (get-view [this view-direction]
+    "Returns the view of the given direction. view-direction must be
+    either :origin or :target.")
+  (update-view [this view-direction f args]
+    "Updates the view for the given direction by (apply f view
+    args). view-direction must be either :origin or :target."))
 
 (defprotocol GraphExt
   (all-nodes [this]

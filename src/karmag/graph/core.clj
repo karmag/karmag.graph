@@ -25,5 +25,8 @@
 (def link? prot/link?)
 (def strip prot/strip)
 (def other-end prot/other-end)
+(def get-view prot/get-view)
+(def update-view (fn [link view-direction f & args]
+                   (prot/update-view link view-direction f args)))
 (def all-nodes prot/all-nodes)
 (def all-links prot/all-links)

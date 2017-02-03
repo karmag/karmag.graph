@@ -90,6 +90,10 @@
     (if (= (get-id ident) (get-origin this))
       (get-target this)
       (get-origin this)))
+  (get-view [this view-direction]
+    (get-in this [::meta :view view-direction]))
+  (update-view [this view-direction f args]
+    (apply update-in this [::meta :view view-direction] f args))
   GraphExt
   (all-nodes [this] (filter node? (all-items this)))
   (all-links [this] (filter link? (all-items this))))

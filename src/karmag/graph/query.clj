@@ -64,11 +64,17 @@
   ([mapped]
    (fn [items]
      (mapcat (fn [node]
-               (->> (get-links node)
-                    (map #(get-item *graph* %))
-                    (filter #(matches mapped %))
-                    (map #(other-end % node))
-                    (map #(get-item *graph* %))))
+               (let [node-id (get-id node)]
+                 (->> (get-links node)
+                      (map #(get-item *graph* %))
+                      (filter (fn [link]
+                                (let [view-dir (if (= node-id (get-origin link))
+                                                 :origin
+                                                 :target)
+                                      view (get-view link view-dir)]
+                                  (matches mapped (merge link view)))))
+                      (map #(other-end % node))
+                      (map #(get-item *graph* %)))))
              items)))
   ([key value & kvs]
    (link (apply hash-map key value kvs))))
