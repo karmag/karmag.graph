@@ -1,6 +1,7 @@
 (ns karmag.graph.core
   (:require [karmag.graph.protocol :as prot]
-            [karmag.graph.basic :as basic]))
+            [karmag.graph.basic :as basic]
+            [karmag.graph.query :as query]))
 
 ;; creation
 (def create-graph basic/create-graph)
@@ -30,3 +31,8 @@
                    (prot/update-view link view-direction f args)))
 (def all-nodes prot/all-nodes)
 (def all-links prot/all-links)
+
+;; query
+(def query query/query)
+(def prop query/prop)
+(def link query/link)
