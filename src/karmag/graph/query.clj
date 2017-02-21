@@ -1,6 +1,5 @@
 (ns karmag.graph.query
-  (:require [karmag.graph.core :refer :all]
-            [karmag.graph.protocol :refer [Ident]]))
+  (:require [karmag.graph.protocol :refer :all]))
 
 (def ^:dynamic *graph*)
 

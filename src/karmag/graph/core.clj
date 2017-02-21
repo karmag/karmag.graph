@@ -1,6 +1,7 @@
 (ns karmag.graph.core
-  (:require [karmag.graph.protocol :as prot]
+  (:require [karmag.graph.core-supplement :as supplement]
             [karmag.graph.basic :as basic]
+            [karmag.graph.protocol :as prot]
             [karmag.graph.query :as query]))
 
 ;; creation
@@ -36,3 +37,6 @@
 (def query query/query)
 (def prop query/prop)
 (def link query/link)
+
+;; supplement
+(def batch supplement/batch)

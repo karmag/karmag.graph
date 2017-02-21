@@ -1,7 +1,6 @@
 (ns karmag.graph.query-test
   (:require [clojure.test :refer :all]
-            [karmag.graph.core :refer :all]
-            [karmag.graph.query :refer :all]))
+            [karmag.graph.core :refer :all]))
 
 (let [node-1 (create-node :type :alpha, :num 101)
       node-2 (create-node :type :alpha, :num 202)
