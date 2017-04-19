@@ -65,7 +65,32 @@
     :else
     (throw (ex-info (str "Unknown batch operation " op) {:operation op}))))
 
-(defn batch [graph ops]
+(defn batch
+  "Execute a number of operations towards the graph using a compact
+  format. ops is a sequence of operations. Available operations are:
+
+  Existing nodes can be referenced by passing an ident as id. Ids
+  should otherwise not be maps. Maps as arguments are used to
+  distinguish nodes and links. The arguments may be in any order.
+
+  Create node [id, node-fragment].
+
+    Creates a node using the given fragment. The id may be used to
+    reference the node in next-coming operations.
+
+  Create link [endpoint, endpoint, link-fragment]. Endpoint is single
+  id or [id, view-fragment].
+
+    Creates a link from the first encountered endpoint to the second
+    endpoint. If the endpoint is specified using the second form the
+    corresponding view will be populated with that fragment.
+
+  Example:
+
+  (batch graph [[:node-1 {:key 1}]
+                [{:key 2} :node-2]
+                [:node-1 [:node-2 {:view :value}] {:link :value}]])"
+  [graph ops]
   (let [data {:graph graph
               :id-mapping {}}]
     (:graph (reduce apply-op data ops))))
