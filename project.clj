@@ -1,4 +1,4 @@
-(defproject karmag/graph "0.3.0"
+(defproject karmag/graph "0.4.0-SNAPSHOT"
   :description "Functional in-memory graph database"
   :url "https://github.com/karmag/karmag.graph"
   :license {:name "Eclipse Public License"
